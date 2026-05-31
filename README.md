@@ -5,6 +5,10 @@
 MakeQuizz es una aplicación pensada para que los profesores puedan crear, administrar y consultar evaluaciones desde su dispositivo móvil, integrándose con la aplicación compañera “TakeQuizz”, utilizada por estudiantes para responder los cuestionarios.
 
 ## Demo 
+Creación de cuestionarios:
+
+https://github.com/user-attachments/assets/819a3f4e-04c3-4871-b39a-961595124326
+
 
 
 ## Features 
