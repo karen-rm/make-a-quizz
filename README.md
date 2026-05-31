@@ -1,16 +1,34 @@
 # makequizz
+<hr>
 
-A new Flutter project.
+## Descripción
+MakeQuizz es una aplicación pensada para que los profesores puedan crear, administrar y consultar evaluaciones desde su dispositivo móvil, integrándose con la aplicación compañera “TakeQuizz”, utilizada por estudiantes para responder los cuestionarios.
 
-## Getting Started
+## Demo 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features 
+El docente puede crear cuestionarios.
+El docente puede modificar los cuestionarios existentes.
+El docente puede agregar preguntas a los cuestinarios.
+El docente puede eliminar preguntas de los cuestionarios
+El docente puede eliminar cuestionarios. 
+El cuestionario posee un código unico para su uso en la aplicación compañera Take a quizz. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+El profesor puede visualizar: 
+• El estudiante con mayor calificación por cada cuestionario. 
+• El estudiante con menor calificación por cada cuestionario. 
+• El usuario que invirtió más tiempo en resolver su examen. 
+• El usuario que invirtió menos tiempo en resolver su examen. 
+• El cuestionario con mayor número de aprobados. 
+• El cuestionario con menor número de aprobados.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Arquitectura
+
+## Tecnologias
+Flutter
+Android Studio 
+
+## Instalación
+
+## Notas 
