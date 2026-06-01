@@ -9,6 +9,17 @@ Creación de cuestionarios:
 
 https://github.com/user-attachments/assets/819a3f4e-04c3-4871-b39a-961595124326
 
+Modificación de cuestionarios:
+
+https://github.com/user-attachments/assets/480da0e6-6fd7-4be4-8333-148932592e6f
+
+Eliminación de cuestionarios:
+
+https://github.com/user-attachments/assets/b54f8619-d962-4331-8c76-642097f2c4e3
+
+Estadísticas por cuestionario: 
+
+https://github.com/user-attachments/assets/be4782e8-2c75-4f48-8c4f-39d26e0f6a01
 
 
 ## Features 
