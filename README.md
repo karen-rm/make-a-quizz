@@ -33,18 +33,20 @@ https://github.com/user-attachments/assets/be4782e8-2c75-4f48-8c4f-39d26e0f6a01
 - Métricas de aprobación por cuestionario.
 
 ## Arquitectura
-Este proyecto forma parte de una solución compuesta por dos aplicaciones Flutter que comparten una misma API REST como fuente central de datos:
+Este proyecto forma parte de una solución compuesta por dos aplicaciones Flutter que comparten una misma API REST como fuente central de datos: <br>
 
-Aplicación Administrativa (este repositorio)
-Creación y gestión de cuestionarios.
-Administración de preguntas.
-Consulta de estadísticas y resultados.
-Modificación y eliminación de cuestionarios.
+<b>Aplicación Administrativa (este repositorio)</b>
+- Creación y gestión de cuestionarios.
+- Administración de preguntas.
+- Consulta de estadísticas y resultados.
+- Modificación y eliminación de cuestionarios.
+<br>
+<b>Aplicación para Alumnos</b>
 
-Aplicación para Alumnos
-Consulta y resolución de cuestionarios.
-Registro de respuestas.
-Envío de resultados al sistema.
+- Consulta y resolución de cuestionarios.
+- Registro de respuestas.
+- Envío de resultados al sistema.
+<br><br>
 
 La aplicación sigue una arquitectura cliente-servidor. El frontend desarrollado en Flutter actúa como cliente y realiza solicitudes HTTP a través de la clase ApiService, que centraliza y encapsula toda la comunicación con el backend.
 
@@ -55,11 +57,14 @@ https://github.com/karen-rm/api-moviles
 
 El acceso a la base de datos se encuentra completamente desacoplado del frontend. Ninguna de las aplicaciones interactúa directamente con la base de datos; todas las operaciones son gestionadas por el backend mediante la API REST.
 
+<img width="360" height="1038" alt="Arquitectura" src="https://github.com/user-attachments/assets/ef083efe-1ee3-4e04-a03b-6ef67bc456d4" />
+
+
 ## Tecnologias
-Flutter
-Android Studio 
-Railway
-PostgreSQL
+- Flutter
+- Android Studio 
+- Railway
+- PostgreSQL
 
 # Instalación
 
@@ -100,9 +105,7 @@ Esta aplicación consume una API REST externa para la gestión de cuestionarios,
 
 Actualmente el backend utilizado durante el desarrollo ya no se encuentra desplegado, por lo que para ejecutar completamente la aplicación es necesario:
 
-1. Desplegar una instancia propia de la API REST. Puede hacerlo clonando este repositorio: 
-
-https://github.com/karen-rm/api-moviles 
+1. Desplegar una instancia propia de la API REST. Puede hacerlo clonando este repositorio: https://github.com/karen-rm/api-moviles 
 
 2. Actualizar la variable `baseUrl` en `services/api_service.dart` con la URL correspondiente.
 
