@@ -21,6 +21,10 @@ Estadísticas por cuestionario:
 
 https://github.com/user-attachments/assets/be4782e8-2c75-4f48-8c4f-39d26e0f6a01
 
+Funcionamiento de la aplicación para los alumnos:
+
+https://github.com/user-attachments/assets/d1e6a42b-e5c5-4cd3-bbd2-78dae1da1bdd
+
 
 ## Features 
 
