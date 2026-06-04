@@ -9,18 +9,22 @@ class ApiService {
 
   //Crear cuestionario 
   Future<Map<String, dynamic>> crearCuestionario(String titulo) async {
-    final url = Uri.parse("$baseUrl/cuestionario");
+    final url = Uri.parse("$baseUrl/cuestionarios");
 
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({"titulo": titulo}),
-    );
+    try{
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"titulo": titulo}),
+      );
 
-    if (response.statusCode == 201) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception("Error al crear cuestionario: ${response.body}");
+      if (response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception("Error al crear cuestionario: ${response.body}");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
@@ -32,24 +36,28 @@ class ApiService {
     required String opc2,
     required int cuestionarioId,
   }) async {
-    final url = Uri.parse("$baseUrl/pregunta");
+    final url = Uri.parse("$baseUrl/cuestionarios/$cuestionarioId/preguntas");
 
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "pregunta": pregunta,
-        "correcta": correcta,
-        "opc1": opc1,
-        "opc2": opc2,
-        "cuestionario_id": cuestionarioId,
-      }),
-    );
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "pregunta": pregunta,
+          "correcta": correcta,
+          "opc1": opc1,
+          "opc2": opc2,
+          "cuestionario_id": cuestionarioId,
+        }),
+      );
 
-    if (response.statusCode == 201) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception("Error al crear pregunta: ${response.body}");
+      if (response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception("Error al crear pregunta: ${response.body}");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
@@ -57,69 +65,85 @@ class ApiService {
   Future<List<dynamic>> obtenerCuestionarios() async {
     final url = Uri.parse("$baseUrl/cuestionarios");
 
-    final res = await http.get(url, headers: _headers);
+    try{
+      final res = await http.get(url, headers: _headers);
 
-    if (res.statusCode != 200) {
-      throw Exception("Error al obtener cuestionarios: ${res.body}");
-    }
+      if (res.statusCode != 200) {
+        throw Exception("Error al obtener cuestionarios: ${res.body}");
+      }
 
-    final data = jsonDecode(res.body);
+      final data = jsonDecode(res.body);
 
-    if (data is List) {
-      return data;
-    } else {
-      throw Exception("La respuesta no es una lista válida");
+      if (data is List) {
+        return data;
+      } else {
+        throw Exception("La respuesta no es una lista válida");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
   //obtener lista de preguntas 
   Future<List<dynamic>> obtenerPreguntas(int cuestionarioId) async {
-    final url = Uri.parse("$baseUrl/preguntas/$cuestionarioId");
+    final url = Uri.parse("$baseUrl/cuestionarios/$cuestionarioId/preguntas");
 
-    final res = await http.get(url, headers: _headers);
+    try{
+      final res = await http.get(url, headers: _headers);
 
-    if (res.statusCode != 200) {
-      throw Exception("Error al obtener preguntas: ${res.body}");
-    }
+      if (res.statusCode != 200) {
+        throw Exception("Error al obtener preguntas: ${res.body}");
+      }
 
-    final data = jsonDecode(res.body);
+      final data = jsonDecode(res.body);
 
-    if (data is List) {
-      return data;
-    } else {
-      throw Exception("La respuesta no es una lista válida");
+      if (data is List) {
+        return data;
+      } else {
+        throw Exception("La respuesta no es una lista válida");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
   //eliminar cuestionario + sus preguntas 
   Future<void> eliminarCuestionarioCompleto(int cuestionarioId) async {
-    final url = Uri.parse("$baseUrl/cuestionario_completo/$cuestionarioId");
+    final url = Uri.parse("$baseUrl/cuestionarios/$cuestionarioId");
 
-    final response = await http.delete(url, headers: _headers);
+    try{
+      final response = await http.delete(url, headers: _headers);
 
-    if (response.statusCode != 200) {
-      throw Exception(
-        "Error al eliminar cuestionario completo: ${response.body}",
-      );
+      if (response.statusCode != 200) {
+        throw Exception(
+          "Error al eliminar cuestionario completo: ${response.body}",
+        );
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
   //obtener datos de estadisticas de aprobados (cuestionario)
   Future<Map<String, dynamic>> obtenerEstadisticasAprobados() async {
-    final url = Uri.parse("$baseUrl/estadisticas/aprobados");
+    final url = Uri.parse("$baseUrl/estadisticas/cuestionarios/aprobados");
 
-    final res = await http.get(url, headers: _headers);
+    try{
+      final res = await http.get(url, headers: _headers);
 
-    if (res.statusCode != 200) {
-      throw Exception("Error al obtener estadísticas de aprobados: ${res.body}");
-    }
+      if (res.statusCode != 200) {
+        throw Exception("Error al obtener estadísticas de aprobados: ${res.body}");
+      }
 
-    final data = jsonDecode(res.body);
+      final data = jsonDecode(res.body);
 
-    if (data is Map<String, dynamic>) {
-      return data;
-    } else {
-      throw Exception("La respuesta no es un JSON válido");
+      if (data is Map<String, dynamic>) {
+        return data;
+      } else {
+        throw Exception("La respuesta no es un JSON válido");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
@@ -127,14 +151,18 @@ class ApiService {
   Future<Map<String, dynamic>> obtenerEstadisticasPorNombre(String nombreCuestionario) async {
     final url = Uri.parse("$baseUrl/estadisticas/alumno/$nombreCuestionario");
 
-    final response = await http.get(url, headers: _headers);
+    try{
+      final response = await http.get(url, headers: _headers);
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else if (response.statusCode == 404) {
-      throw Exception("Cuestionario no encontrado");
-    } else {
-      throw Exception("Error al obtener estadísticas: ${response.body}");
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else if (response.statusCode == 404) {
+        throw Exception("Cuestionario no encontrado");
+      } else {
+        throw Exception("Error al obtener estadísticas: ${response.body}");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
@@ -143,21 +171,26 @@ class ApiService {
       int cuestionarioId,
       String nuevoTitulo,
     ) async {
-    final url = Uri.parse("$baseUrl/cuestionario/$cuestionarioId");
+    final url = Uri.parse("$baseUrl/cuestionarios/$cuestionarioId");
 
-    final res = await http.put(
-      url,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: jsonEncode({"titulo": nuevoTitulo}),
-    );
+    try{
+      final res = await http.put(
+        url,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: jsonEncode({"titulo": nuevoTitulo}),
+      );
 
-    if (res.statusCode != 200) {
-      throw Exception("Error al actualizar cuestionario: ${res.body}");
+      if (res.statusCode != 200) {
+        throw Exception("Error al actualizar cuestionario: ${res.body}");
+      }
+
+      return jsonDecode(res.body);
+
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
-
-    return jsonDecode(res.body);
   }
 
   //actualizar info de una pregunta 
@@ -168,61 +201,78 @@ class ApiService {
     required String opc1,
     required String opc2,
   }) async {
-    final url = Uri.parse("$baseUrl/pregunta/$idPregunta");
+    final url = Uri.parse("$baseUrl/preguntas/$idPregunta");
 
-    final body = {
-      "pregunta": pregunta,
-      "correcta": correcta,
-      "opcion1": opc1,
-      "opcion2": opc2,
-    };
+    try{
+      final body = {
+        "pregunta": pregunta,
+        "correcta": correcta,
+        "opcion1": opc1,
+        "opcion2": opc2,
+      };
 
-    final res = await http.put(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(body),
-    );
+      final res = await http.put(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(body),
+      );
 
-    if (res.statusCode != 200) {
-      throw Exception("Error actualizando la pregunta: ${res.body}");
+      if (res.statusCode != 200) {
+        throw Exception("Error actualizando la pregunta: ${res.body}");
+      }
+
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
   //obtener info cuestionario + info de sus preguntas asociadas 
   Future<Map<String, dynamic>> obtenerCuestionarioDetalle(int id) async {
-    final url = Uri.parse("$baseUrl/cuestionario/$id/detalle");
+    final url = Uri.parse("$baseUrl/cuestionarios/$id");
 
-    final res = await http.get(url, headers: _headers);
+    try{
+      final res = await http.get(url, headers: _headers);
 
-    if (res.statusCode != 200) {
-      throw Exception("Error al obtener detalles: ${res.body}");
+      if (res.statusCode != 200) {
+        throw Exception("Error al obtener detalles: ${res.body}");
+      }
+
+      return jsonDecode(res.body);
+
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
-
-    return jsonDecode(res.body);
   }
 
   //eliminar una pregunta con su id 
   Future<void> eliminarPreguntaPorId(int idPregunta) async {
-    final url = Uri.parse("$baseUrl/pregunta/$idPregunta");
+    final url = Uri.parse("$baseUrl/preguntas/$idPregunta");
 
-    final res = await http.delete(url);
+    try{
+      final res = await http.delete(url);
 
-    if (res.statusCode != 200) {
-      throw Exception("Error al eliminar la pregunta: ${res.body}");
+      if (res.statusCode != 200) {
+        throw Exception("Error al eliminar la pregunta: ${res.body}");
+      }
+    } catch (e) {
+      throw Exception("Error de conexión al servidor: $e");
     }
   }
 
   Future<List<dynamic>> obtenerResultadosPorCuestionario(int idCuestionario) async {
-  final url = Uri.parse("$baseUrl/alumnos/cuestionario/$idCuestionario");
-  final res = await http.get(url);
+  final url = Uri.parse("$baseUrl/cuestionarios/$idCuestionario/alumnos");
 
-  if (res.statusCode == 200) {
-    return jsonDecode(res.body);
-  } else {
-    throw Exception("Error al obtener resultados por cuestionario");
+  try{
+    final res = await http.get(url);
+
+    if (res.statusCode == 200) {
+      return jsonDecode(res.body);
+    } else {
+      throw Exception("Error al obtener resultados por cuestionario");
+    }
+  } catch (e) {
+    throw Exception("Error de conexión al servidor: $e");
   }
 }
-
-
 
 }
